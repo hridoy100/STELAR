@@ -1,8 +1,8 @@
 DESCRIPTION:
 ----------------------
-DynaDup is a Java program based on phylonet (bioinfo.cs.rice.edu/phylonet) for estimating species trees given a set of rooted gene trees, such that duplications or duplication and losses are minimized (within a constrained search space). The algorithm used is described in:
-
-S. Bayzid, S. Mirarab, T. Warnow, "Optimal Species Trees under Gene Duplication and Loss", Pacific Symposium on Biocomputing (PSB) 2013 and
+STELAR is a Java program based on phylonet (bioinfo.cs.rice.edu/phylonet)  for estimating species trees given a set of rooted gene trees, such that duplications or duplication and losses are minimized (within a constrained search space). The algorithm used is described in:
+<!---
+<S. Bayzid, S. Mirarab, T. Warnow, "Optimal Species Trees under Gene Duplication and Loss", Pacific Symposium on Biocomputing (PSB) 2013 and
 S. Bayzid and T. Warnow, "Gene Tree Parsimony for Incomplete Gene Trees". 17th International Workshop on Algorithms for Bioinformatics (WABI) 2017. Lecture Notes in Computer Science (LNCS).
 
 
@@ -81,7 +81,7 @@ Memory:
 For big datasets (say 500-taxon), increasing the memory available to Java can result in a speed-up. Note that you should give Java only as much as free memory you have available on your machine. So, for example, if you have 3GB of free memory, you can invoke DynaDup using the following command to make all the 3GB available to Java:
 
 java -Xmx3000M -jar mgd.2.3.2.jar -i in.tree
-
+-->
 
 Acknowledgment
 -----------------------
