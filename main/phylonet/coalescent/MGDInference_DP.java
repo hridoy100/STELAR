@@ -50,7 +50,7 @@ public class MGDInference_DP {
 	private boolean exactSolution;
 	private STITree st = null;
 	
-	// this is comment
+	
 	class TaxonNameMap {
 		Map<String, String> taxonMap;
 		String pattern = null;
@@ -474,11 +474,11 @@ public class MGDInference_DP {
 		List<Solution> solutions = inference.inferSpeciesTree();
 
 		//if (_print) {
-			System.err.println("Optimal tree inferred in "
-					+ (System.currentTimeMillis() - startTime) / 1000.0D
-					+ " secs");
+		//	System.err.println("Optimal tree inferred in "
+			//		+ (System.currentTimeMillis() - startTime) / 1000.0D
+				//	+ " secs");
 		//}
-
+		///*
 		if ((_print)) {
 			String metric;
 			if (optimizeDuploss == 0) {
@@ -491,9 +491,10 @@ public class MGDInference_DP {
 			for (Solution s : solutions)
 				System.out.println(
 					        s._st.toStringWD()
-						+ " \n"
-						+ s._totalCoals
-						+ " " + metric + " in total");
+					//	+ " \n"
+						//+ s._totalCoals
+						//+ " " + metric + " in total");
+					        );
 		} else
 			try {
 				FileWriter fw = new FileWriter(output);
@@ -506,6 +507,7 @@ public class MGDInference_DP {
 				System.err.println(e.getMessage());
 				e.printStackTrace();
 			}
+		//	*/
 	}
 
 	private int [] calc(Tree gtTree, SchieberVishkinLCA lcaLookup, Tree stTree) {
@@ -966,8 +968,9 @@ public class MGDInference_DP {
 			}
 		}
 
-		sol._totalCoals = (int) (sigmaNs - all._max_score);
-		System.out.println("total cost: " + (sigmaNs - all._max_score));
+		//sol._totalCoals = (int) (sigmaNs - all._max_score);
+		//System.out.println("total cost: " + (sigmaNs - all._max_score));
+	//	System.out.println("Score of constructed species tree = "+all._max_score);
 		solutions.add(sol);
 
 		return (List<Solution>) (List<Solution>) solutions;

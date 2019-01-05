@@ -513,9 +513,9 @@ public class DuplicationWeightCounter {
 	void preCalculateWeights(List<Tree> trees, List<Tree> extraTrees) {
 
 		if (rooted && taxonNameMap == null && stTaxa.length > trees.size()) {
-			calculateWeightsByLCA(trees, trees);
+			//calculateWeightsByLCA(trees, trees);
 			if (extraTrees != null) {
-				calculateWeightsByLCA(extraTrees, trees);
+				//calculateWeightsByLCA(extraTrees, trees);
 			}
 		}
 
@@ -592,13 +592,35 @@ public class DuplicationWeightCounter {
 		int calculateMissingWeight() {
 			// System.err.print("Calculating weight for: " + biggerSTB);
 			int weight = 0;
-			for (STBipartition smallerSTB : containedClusterCollection
-					.getContainedGeneTreeSTBs()) {
-				if (smallerSTB == stb || smallerSTB.isDominatedBy(stb)) {
-					weight += geneTreeSTBCount.get(smallerSTB);
-				}
+			// System.err.print("Calculating weight for: " + biggerSTB);                              
+			BitSet X =  stb.cluster1.getBitSet() ;
+			BitSet Y =  stb.cluster2.getBitSet() ;
+			//System.out.println("Calculating missing Weight");
+			//System.out.println(stb.toString());
+			for (STBipartition smallerSTB : clusters.getContainedGeneTreeSTBs()) {
+					int temp = 0;
+					// possible place of implementation.
+				//	System.out.println("Loop "+ smallerSTB.toString() +"count =  "+ geneTreeSTBCount.get(smallerSTB)); 
+					BitSet A = smallerSTB.cluster1.getBitSet();
+					BitSet B = smallerSTB.cluster2.getBitSet();
+					
+					BitSet X1 = and(X,A);
+					BitSet Y1 = and(Y,B);
+					temp = apply(X1, Y1);
+
+					BitSet X2 = and(X,B);
+					BitSet Y2 = and(Y,A);
+					temp += apply(X2, Y2);
+								
+					//System.out.println(geneTreeSTBCount.get(smallerSTB));
+					temp *= geneTreeSTBCount.get(smallerSTB);
+					weight += temp;
+					//System.out.println(smallerSTB.toString() + " :: "+ temp);
 			}
+						
+		//	System.out.println("STB score of + " + stb.toString() + " is =  "+weight);
 			// System.err.print(" ... " + weight);
+			
 			if (!rooted) {
 				throw new RuntimeException("Unrooted not implemented.");
 				/*
@@ -621,6 +643,22 @@ public class DuplicationWeightCounter {
 			return calculateMissingWeight();
 		}
 
+	}
+	int apply(BitSet x, BitSet y) {
+		int res = 0;
+		int c1 = x.cardinality();
+		int c2 = y.cardinality();
+
+		res = c1*(c1-1)*c2 + c2*(c2-1)*c1;
+		res /=2;
+		return res;
+	}
+	BitSet and(BitSet x, BitSet y) {
+		BitSet _x = (BitSet) x.clone();
+		BitSet _y = (BitSet) y.clone();
+		_x.and(_y);
+
+		return _x;
 	}
 
 	/*
