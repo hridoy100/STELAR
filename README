@@ -81,7 +81,7 @@ Memory:
 For big datasets (say 500-taxon), increasing the memory available to Java can result in a speed-up. Note that you should give Java only as much as free memory you have available on your machine. So, for example, if you have 3GB of free memory, you can invoke DynaDup using the following command to make all the 3GB available to Java:
 
 java -Xmx3000M -jar mgd.2.3.2.jar -i in.tree
--->
+--->
 
 Acknowledgment
 -----------------------
