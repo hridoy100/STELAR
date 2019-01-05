@@ -50,7 +50,7 @@ public class MGDInference_DP {
 	private boolean exactSolution;
 	private STITree st = null;
 	
-	
+	// this is comment
 	class TaxonNameMap {
 		Map<String, String> taxonMap;
 		String pattern = null;
