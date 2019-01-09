@@ -8,4 +8,6 @@
 		<item value="1" key="rootMode"/>
 		<item value="true" key="linkWithEditor"/>
 	</section>
+	<section name="JavaElementSearchActions">
+	</section>
 </section>

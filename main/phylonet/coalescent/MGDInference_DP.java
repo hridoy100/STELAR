@@ -32,6 +32,7 @@ import phylonet.tree.util.Trees;
 import phylonet.util.BitSet;
 
 public class MGDInference_DP {
+	public static double _versinon =  0.0;
 	static boolean _print = true;
 	int optimizeDuploss = 1; //one means dup, 3 means duploss
 	boolean rooted = true;
@@ -95,6 +96,10 @@ public class MGDInference_DP {
 	}
 	
 	public static void main(String[] args) {
+		
+		System.err.println("\n================== STELAR ===================== \n" );
+        System.err.println("This is STELAR version " + _versinon);
+        
 		if ((args == null) || args.length == 0 || (args[0].equals("-h"))
 				|| (args.length < 1)) {
 			printUsage();
