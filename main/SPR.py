@@ -1,3 +1,5 @@
+# From Ishrat Jahan of UIU
+
 from pylogeny.tree import tree     # import tree class definition
 
 

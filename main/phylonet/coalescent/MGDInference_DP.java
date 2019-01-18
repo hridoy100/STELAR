@@ -472,8 +472,12 @@ public class MGDInference_DP {
 		inference.st = scorest;
 
 		if (scorest != null) {
+			System.out.println("in score gene tree");
 			inference.scoreGeneTree();
 			System.exit(0);
+		}
+		else {
+			System.out.println("not in score gene tree");
 		}
 		
 		List<Solution> solutions = inference.inferSpeciesTree();
@@ -515,7 +519,7 @@ public class MGDInference_DP {
 		//	*/
 	}
 
-	private int [] calc(Tree gtTree, SchieberVishkinLCA lcaLookup, Tree stTree) {
+	private int [] calc(Tree gtTree, SchieberVishkinLCA lcaLookup, Tree stTree) { // lcalookup is made from stTree
 		int [] res = {0,0,0};
 		Stack<TNode> stack = new Stack<TNode>();			
 		for (TNode gtNode : gtTree.postTraverse()) {
@@ -531,15 +535,45 @@ public class MGDInference_DP {
 			    	stack.push(node);
 				//System.out.println("stack: " +this.taxonNameMap.getTaxonName(gtNode.getName()));
 			} else {
-				TNode rightLCA = stack.pop();
+
 				TNode leftLCA = stack.pop();
+				TNode rightLCA = stack.pop();
+				if (rightLCA == null || leftLCA == null) {
+					stack.push(null);
+					continue;
+				}
+				TNode lca = lcaLookup.getLCA(leftLCA, rightLCA);
+			//	System.out.println(rightLCA.getParent()+" is mapped to "+lca);
+				List<TNode> stLeaf = new ArrayList<TNode>();
+				List<TNode> gtLeaf = new ArrayList<TNode>();
+				
+				gtLeaf.add(leftLCA);
+				gtLeaf.add(rightLCA);
+				
+				for(TNode node: lca.getChildren()) {
+					stLeaf.add(node);
+				}
+				if(stLeaf.size()!=2) {
+					System.out.println("Some thing is wrong!" + stLeaf.size());
+					return res;
+				}
+				res[0] += d (stLeaf.get(0),gtLeaf.get(0), stLeaf.get(1),gtLeaf.get(1));
+				res[0] += d (stLeaf.get(1),gtLeaf.get(0), stLeaf.get(0),gtLeaf.get(1));
+				/*
+				for(TNode node: rightLCA.getChildren()){
+					System.out.print(node.getID()+" ");
+				}
+				System.out.println("");
+				
 				// If gene trees are incomplete, we can have this case
 				if (rightLCA == null || leftLCA == null) {
 					stack.push(null);
 					continue;
 				}
 				TNode lca = lcaLookup.getLCA(leftLCA, rightLCA);
+				*/
 				stack.push(lca);
+				/*
 				if (lca == leftLCA || lca == rightLCA) {
 					// LCA in stTree dominates gtNode in gene tree
 					res[0]++;
@@ -553,6 +587,7 @@ public class MGDInference_DP {
 				} else {
 					res[1] += (d(rightLCA,lca) + d(leftLCA,lca));
 				}
+			//	*/
 			}
 		}
 		TNode rootLCA = stack.pop();
@@ -561,16 +596,42 @@ public class MGDInference_DP {
 		return res;
 	}
 	
+	public int d(TNode X, TNode A, TNode Y, TNode B) {
+		int d1 = intersectionCount(X,A);
+		int d2= intersectionCount(Y,Y);
+		return F(d1,d2) + F(d2,d1);
+	}
+	int F(int p,int q) {
+		return (p*q*(q-1))/2;
+	}
+
+	private int intersectionCount(TNode n1, TNode n2) {
+		int val = 0;
+		for(TNode node1: n1.getLeaves()) {
+			for(TNode node2: n2.getLeaves()) {
+				//System.out.println(node1+ "&"+node2);
+				if(node1.getName() == node2.getName()) {
+					val++;
+				}
+			}
+		}
+	//	System.out.println(n1.getLeaves()+" & "+n2.getLeaves()+" & score is = "+val);
+		return val;
+	}
+
 	private void scoreGeneTree() {
+		
+		// does this calculate st score when a st is given -st argument?
 		// first calculated duplication cost by looking at gene trees. 
 		
-		SchieberVishkinLCA lcaLookup = new SchieberVishkinLCA(this.st);
+		SchieberVishkinLCA lcaLookup = new SchieberVishkinLCA(this.st); // lcaLookUp is a tree
+		System.out.println(lcaLookup.getTree());
 		Integer duplications = 0;
 		Integer losses = 0;
 		Integer lossesstd = 0;
 		
 		for (Tree gtTree : this.trees) {
-			int[] res = calc(gtTree,lcaLookup, this.st);
+			int[] res = calc(gtTree,lcaLookup, this.st); // calc what? why we are sending lcaklookup and st since lcalookup is made from st?
 			duplications += res[0];
 			losses += res[1];
 			
@@ -598,7 +659,7 @@ public class MGDInference_DP {
 	}
 	protected static void printUsage() {
 		System.out
-				.println("This tool infers the species tree from rooted gene trees despite lineage sorting.");
+				.println("This tool infers the species tree from rooted gene trees  by maximizing  the triplet distribution in the input gene trees.");
 		System.out.println("Usage is:");
 		System.out
 				.println("\tMGDInference_DP -i input [-a mapping] [-dl | -dll] [-ex extra_trees] [-o output] [-cs number] [-cd number] [-xt] [-s species tree] [-wd duplication weight]");
