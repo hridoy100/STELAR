@@ -472,7 +472,7 @@ public class MGDInference_DP {
 		inference.st = scorest;
 
 		if (scorest != null) {
-			System.out.println("in score gene tree");
+			//System.out.println("in score gene tree");
 			inference.scoreGeneTree();
 			System.exit(0);
 		}
@@ -497,18 +497,23 @@ public class MGDInference_DP {
 			} else {
 				metric = "duplication+loss (original)";
 			}
-			for (Solution s : solutions)
+			for (Solution s : solutions) {
+				
 				System.out.println(
 					        s._st.toStringWD()
 					//	+ " \n"
 						//+ s._totalCoals
 						//+ " " + metric + " in total");
 					        );
+			}
 		} else
 			try {
 				FileWriter fw = new FileWriter(output);
+				System.out.println(solutions.size());
+
 				for (Solution s : solutions) {
 					fw.write(s._st.toString()+ " \n");
+					System.out.println(s._st.toString());
 				}
 				fw.close();
 			} catch (IOException e) {
@@ -521,7 +526,47 @@ public class MGDInference_DP {
 
 	private int [] calc(Tree gtTree, SchieberVishkinLCA lcaLookup, Tree stTree) { // lcalookup is made from stTree
 		int [] res = {0,0,0};
-		Stack<TNode> stack = new Stack<TNode>();			
+	//	Stack<TNode> stack = new Stack<TNode>();
+		for(TNode t: gtTree.getNodes()) {
+			if(t.isLeaf()) {
+				continue;
+			}
+			
+			List<TNode> gtLeaf = new ArrayList<TNode>();
+			for(TNode child: t.getChildren()) {
+		//		System.out.print(child.getLeaves());
+				gtLeaf.add(child);
+			}
+	//		System.out.println("\n====");
+			for(TNode t2: stTree.getNodes()) {
+				List<TNode> stLeaf = new ArrayList<TNode>();
+				if(t2.isLeaf()) {
+					continue;
+				}
+				for(TNode child: t2.getChildren()) {
+	//					System.out.print(child.getLeaves());
+						stLeaf.add(child);
+				}
+	//			System.out.println("");
+				int score=0;
+				//System.out.println(stLeaf.size()+" "+gtLeaf.size());
+				score += d (stLeaf.get(0),gtLeaf.get(0), stLeaf.get(1),gtLeaf.get(1));
+				//	System.out.print(score+" ");
+				score += d (stLeaf.get(1),gtLeaf.get(0), stLeaf.get(0),gtLeaf.get(1));
+			//	System.out.println(score);
+				res[0]+=score;
+			}
+	//		System.out.println("");
+		//	TNode lca = lcaLookup.getLCA(gtLeaf.get(0),gtLeaf.get(1));
+		//	if(lca == null || lca.isLeaf()) {
+		//		continue;
+		//	}
+		//	for(TNode t1: lca.getChildren()) {
+		//		stLeaf.add(t1);
+		//	}
+			
+		}
+		/*
 		for (TNode gtNode : gtTree.postTraverse()) {
 			if (gtNode.isLeaf()) {
 			    	TNode node = stTree.getNode(this.taxonNameMap !=null ? 
@@ -535,10 +580,11 @@ public class MGDInference_DP {
 			    	stack.push(node);
 				//System.out.println("stack: " +this.taxonNameMap.getTaxonName(gtNode.getName()));
 			} else {
-
+				
 				TNode leftLCA = stack.pop();
 				TNode rightLCA = stack.pop();
 				if (rightLCA == null || leftLCA == null) {
+					System.out.println("Should not be printed");
 					stack.push(null);
 					continue;
 				}
@@ -557,8 +603,22 @@ public class MGDInference_DP {
 					System.out.println("Some thing is wrong!" + stLeaf.size());
 					return res;
 				}
-				res[0] += d (stLeaf.get(0),gtLeaf.get(0), stLeaf.get(1),gtLeaf.get(1));
-				res[0] += d (stLeaf.get(1),gtLeaf.get(0), stLeaf.get(0),gtLeaf.get(1));
+
+				for(TNode t: stLeaf) {
+					System.out.print(t.getLeaves());
+				}
+				System.out.print(" ");
+				for(TNode t: gtLeaf) {
+					System.out.print(t.getLeaves());
+				}
+				System.out.print(" ");
+				
+				int score=0;
+				score += d (stLeaf.get(0),gtLeaf.get(0), stLeaf.get(1),gtLeaf.get(1));
+				System.out.print(score+" ");
+				score += d (stLeaf.get(1),gtLeaf.get(0), stLeaf.get(0),gtLeaf.get(1));
+				System.out.println(score);
+				res[0]+=score;
 				/*
 				for(TNode node: rightLCA.getChildren()){
 					System.out.print(node.getID()+" ");
@@ -572,7 +632,11 @@ public class MGDInference_DP {
 				}
 				TNode lca = lcaLookup.getLCA(leftLCA, rightLCA);
 				*/
-				stack.push(lca);
+		//		if(leftLCA.getParent()!=rightLCA.getParent()) {
+		//			System.out.println("!OK");
+		//		}
+		//		stack.push(lca);
+				//break;
 				/*
 				if (lca == leftLCA || lca == rightLCA) {
 					// LCA in stTree dominates gtNode in gene tree
@@ -587,18 +651,18 @@ public class MGDInference_DP {
 				} else {
 					res[1] += (d(rightLCA,lca) + d(leftLCA,lca));
 				}
-			//	*/
 			}
 		}
-		TNode rootLCA = stack.pop();
-		res[2] = res[1];
-		res[1] += d(rootLCA,stTree.getRoot()) + (rootLCA == stTree.getRoot()?0:1);
+	//	TNode rootLCA = stack.pop();
+	//	res[2] = res[1];
+		res[0] += d(rootLCA,stTree.getRoot()) + (rootLCA == stTree.getRoot()?0:1);
+		*/
 		return res;
 	}
 	
 	public int d(TNode X, TNode A, TNode Y, TNode B) {
 		int d1 = intersectionCount(X,A);
-		int d2= intersectionCount(Y,Y);
+		int d2= intersectionCount(Y,B);
 		return F(d1,d2) + F(d2,d1);
 	}
 	int F(int p,int q) {
@@ -609,8 +673,8 @@ public class MGDInference_DP {
 		int val = 0;
 		for(TNode node1: n1.getLeaves()) {
 			for(TNode node2: n2.getLeaves()) {
-				//System.out.println(node1+ "&"+node2);
-				if(node1.getName() == node2.getName()) {
+			//	System.out.println(node1.getName()+ "&"+node2.getName());
+				if(node1.getName().equals(node2.getName())) {
 					val++;
 				}
 			}
@@ -625,29 +689,30 @@ public class MGDInference_DP {
 		// first calculated duplication cost by looking at gene trees. 
 		
 		SchieberVishkinLCA lcaLookup = new SchieberVishkinLCA(this.st); // lcaLookUp is a tree
-		System.out.println(lcaLookup.getTree());
+	//	System.out.println(lcaLookup.getTree());
 		Integer duplications = 0;
-		Integer losses = 0;
+		Integer triplets = 0;
 		Integer lossesstd = 0;
 		
 		for (Tree gtTree : this.trees) {
 			int[] res = calc(gtTree,lcaLookup, this.st); // calc what? why we are sending lcaklookup and st since lcalookup is made from st?
-			duplications += res[0];
-			losses += res[1];
+			triplets += res[0];
+		//	lossesstd += res[1];
 			
-			STITree hmst = new STITree(this.st);
+		//	STITree hmst = new STITree(this.st);
 			//hmst.constrainByLeaves(Arrays.asList(gtTree.getLeaves()));
-			SchieberVishkinLCA hmlcaLookup = new SchieberVishkinLCA(hmst);
-			int[] res2 = calc(gtTree,hmlcaLookup, hmst);
+		//	SchieberVishkinLCA hmlcaLookup = new SchieberVishkinLCA(hmst);
+		//	int[] res2 = calc(gtTree,hmlcaLookup, hmst);
 			
-			lossesstd += res2[2];
+		//	lossesstd += res2[2];
 		}
-		System.out.println("Total number of duplications is: "+duplications);
-		System.out.println("Total number of losses (bd) is: "+losses);
-		System.out.println("Total number of losses (std) is: "+lossesstd);
-		System.out.println("Total number of duploss (bd) is: " + (losses+duplications));
-		System.out.println("Total number of duploss (st) is: " + (lossesstd+duplications));
-		System.out.println("Total weighted (wd = "+this.DLbdWeigth+") loss is: " + (lossesstd + this.DLbdWeigth*(losses-lossesstd)));
+	//	System.out.println("Total number of duplications is: "+duplications);
+	//	System.out.println("Total number of losses (bd) is: "+losses);
+	//	System.out.println("Total number of losses (std) is: "+lossesstd);
+	//	System.out.println("Total number of duploss (bd) is: " + (losses+duplications));
+	//	System.out.println("Total number of duploss (st) is: " + (lossesstd+duplications));
+	//	System.out.println("Total weighted (wd = "+this.DLbdWeigth+") loss is: " + (lossesstd + this.DLbdWeigth*(losses-lossesstd)));
+	System.out.println("Total number of triplets satisfied in (st) is: " + triplets);
 	}
 
 	private int d (TNode down, TNode upp) {
