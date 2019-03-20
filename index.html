@@ -8,15 +8,15 @@
   <title> STELAR </title>
 
   <!-- Bootstrap core CSS -->
-  <link href="css" rel="stylesheet" type="text/css">
-  <link href="bootstrap.min.css" rel="stylesheet">
-  <link href="jumbotron-narrow.css" rel="stylesheet">
-  <link href="main.css" rel="stylesheet">
+  <link href="website/css" rel="stylesheet" type="text/css">
+  <link href="website/bootstrap.min.css" rel="stylesheet">
+  <link href="website/jumbotron-narrow.css" rel="stylesheet">
+  <link href="website/main.css" rel="stylesheet">
 
 
 
-  <script src="jquery-1.11.0.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+  <script src="website/jquery-1.11.0.min.js"></script>
+  <script src="website/bootstrap.min.js"></script>
   <script>
     $(document).ready(function() {
       // add a hash to the URL when the user clicks on a tab
@@ -35,28 +35,44 @@
       $('a[href=#about]').tab('show');
     })
   </script>
+  
+  
+ 
   </head>
 
-  <body data-gr-c-s-loaded="true">
+ 
+
 
 <div class="container">
   <div class="header">
     
-    <h3><strong>STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency</strong></h3>
-  </div>
-  
   <ul class="nav nav-pills pull-right" id="tabs">
       <li class="active"><a href="#about" data-toggle="tab">about</a></li>
       <li class=""><a href="#installation" data-toggle="tab">installation</a></li>
       <li class=""><a href="#datasets" data-toggle="tab">datasets</a></li>
-      <li class=""><a href="#contributors" data-toggle="tab">contributors</a></li>
-    </ul>
+     <!-- <li class=""><a href="#contributors" data-toggle="tab">contributors</a></li> !-->
+  </ul>
+  <h3><strong>STELAR</strong></h3>
 <div class="tab-content">
 
 
 <div class="tab-pane active" id="about">
 <div class="col-lg-12">
   
+<h4>Description</h4>
+<p>
+STELAR is a Java program based on phylonet <a href="https://bioinfocs.rice.edu/phylonet"> (bioinfo.cs.rice.edu/phylonet) </a> for estimating species trees given a set of rooted gene trees, such that duplications or duplication and losses are minimized (within a constrained search space). 
+The algorithm used is described in our paper title <span class="paper-title">"STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency"</span>.
+</p>
+
+<h4>Acknowledgment</h4>
+<p>
+STELAR code uses code from the PhyloNet package (by Luay Nakhleh).
+</p>
+<h4>Bug Reports</h4>
+<p>
+We are always looking for ways to improve our codes. For any bugs please email at:  mazhar.buet11@gmail.com.
+</p>
   <h4>Background</h4>
   <p>
   Species tree estimation is frequently based on phylogenomic approaches that use multiple genes from throughout
@@ -94,12 +110,11 @@
 <div class="tab-pane" id="datasets">
   <div class="col-lg-12">
     <h3>Datasets</h3>
-  </div>
-</div>
-
-<div class="tab-pane" id="contributors">
-  <div class="col-lg-12">
-    <h3>Contributors</h3>
+    We have analyzied the following datasets.
+    <h4>11 taxon</h4>
+    <h4>15 taxon</h4>
+    <h4>37 taxon</h4>
+    <h4>Real biological dataset</h4>
   </div>
 </div>
 

@@ -208,7 +208,7 @@ public class ComputeMinCostTask {
 					v._min_lc = smallV;
 					v._min_rc = bigv;
 					v._c = c;
-					System.out.println(v._max_score);
+					//System.out.println(v._max_score);
 
 				} catch (CannotResolveException c) {
 					// System.err.println("Warn: cannot resolve: " +

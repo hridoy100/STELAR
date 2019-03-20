@@ -1,11 +1,7 @@
 package phylonet.coalescent;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -118,6 +114,7 @@ public class MGDInference_DP {
 		List<Tree> trees = null;
 		List<Tree> extraTrees = null;
 		String output = null;
+		String timeFile = null;
 		STITree scorest = null;
 		// boolean explore = false;
 		// double proportion = 0.0D;
@@ -133,6 +130,7 @@ public class MGDInference_DP {
 		String line;
 		BufferedReader treeBufferReader = null;
 		BufferedReader extraTreebuffer = null;
+		String inputFilename = null;
 		try {
 			List<String[]> options = getOptions(args);
 			for (String[] option : options) {
@@ -141,6 +139,7 @@ public class MGDInference_DP {
 						printUsage();
 						return;
 					}
+					inputFilename = option[1];
 					treeBufferReader = new BufferedReader(new FileReader(
 							option[1]));
 
@@ -356,7 +355,11 @@ public class MGDInference_DP {
 						printUsage();
 						return;
 					}
-				} else {
+				} 
+				else if(option[0].equals("-t")) {
+					timeFile = option[1];
+				}
+				else {
 					printUsage();
 					return;
 				}
@@ -477,17 +480,30 @@ public class MGDInference_DP {
 			System.exit(0);
 		}
 		else {
-			System.out.println("not in score gene tree");
+			//System.out.println("not in score gene tree");
 		}
-		
+		startTime = System.currentTimeMillis();
 		List<Solution> solutions = inference.inferSpeciesTree();
+		long endTime = System.currentTimeMillis();
 
-		//if (_print) {
-		//	System.err.println("Optimal tree inferred in "
-			//		+ (System.currentTimeMillis() - startTime) / 1000.0D
-				//	+ " secs");
-		//}
-		///*
+
+        System.err.println("Optimal tree inferred in "
+					+ (System.currentTimeMillis() - startTime) / 1000.0D
+					+ " secs");
+
+        if(inputFilename !=null){
+            try {
+                PrintWriter pw = new PrintWriter(new FileWriter(inputFilename+".log", true));
+                pw.append("Optimal tree inferred in "
+                        + (System.currentTimeMillis() - startTime) / 1000.0D
+                        + " secs for "+inputFilename+"\n");
+                pw.close();
+            }catch(Exception ex){
+                System.out.println("error while outputting time value");
+            }
+
+        }
+
 		if ((_print)) {
 			String metric;
 			if (optimizeDuploss == 0) {
@@ -509,11 +525,11 @@ public class MGDInference_DP {
 		} else
 			try {
 				FileWriter fw = new FileWriter(output);
-				System.out.println(solutions.size());
+			//	System.out.println(solutions.size());
 
 				for (Solution s : solutions) {
 					fw.write(s._st.toString()+ " \n");
-					System.out.println(s._st.toString());
+					//System.out.println(s._st.toString());
 				}
 				fw.close();
 			} catch (IOException e) {
@@ -712,7 +728,7 @@ public class MGDInference_DP {
 	//	System.out.println("Total number of duploss (bd) is: " + (losses+duplications));
 	//	System.out.println("Total number of duploss (st) is: " + (lossesstd+duplications));
 	//	System.out.println("Total weighted (wd = "+this.DLbdWeigth+") loss is: " + (lossesstd + this.DLbdWeigth*(losses-lossesstd)));
-	System.out.println("Total number of triplets satisfied in (st) is: " + triplets);
+		System.out.println("Total number of triplets satisfied in (st) is: " + triplets);
 	}
 
 	private int d (TNode down, TNode upp) {
