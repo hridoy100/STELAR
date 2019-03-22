@@ -12,8 +12,23 @@
   <link href="website/bootstrap.min.css" rel="stylesheet">
   <link href="website/jumbotron-narrow.css" rel="stylesheet">
   <link href="website/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
 
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
 
   <script src="website/jquery-1.11.0.min.js"></script>
   <script src="website/bootstrap.min.js"></script>
@@ -78,8 +93,8 @@ STELAR code uses code from the PhyloNet package by Luay Nakhleh <a href="https:/
   
 <h4>Bug Reports</h4>
 <p>
-We are always looking for ways to improve our codes. For any bugs please email at:  mazhar.buet11@gmail.com.
-</p>
+We are always looking for ways to improve our codes. For any bugs please email at:
+<a href = "mailto: mazhar.buet11@gmail.com.">mazhar.buet11@gmail.com</a> </p>
   <h4>Background and results</h4>
   <p>
   Species tree estimation is frequently based on phylogenomic approaches that use multiple genes from throughout
@@ -105,8 +120,30 @@ We are always looking for ways to improve our codes. For any bugs please email a
 
 <div class="tab-pane" id="installation">
 <div class="col-lg-12">
-  <h3>Installtion guide</h3>
   
+  <form method="get" action="https://github.com/islamazhar/STELAR/releases/download/v1.0/STELAR.jar">
+   <button class="btn"><i class="fa fa-download"></i> Download STELAR</button>
+</form>
+  
+  <h4>How to run</h4>
+	STELAR provides a jar file. You need to execute the jar file via command line. STELAR requires your machine to have java version 1.5
+	installed on your computer or later.
+	<ul>	
+	<li><code>cd</code> to the location where you have downloaded the STELAR jar file. </li>
+	<li>run the following command</li>
+	<code>java -jar STELAR.jar -i in.gene.trees-o out.species.tree</code> <br>
+		Here,
+		<ul>
+			<li><code>in.gene.trees</code> is the input gene trees which needs to be  a) fully resolved, b) rooted.</li>
+			<li><code>out.species.tree</code> is the output species trees</li>
+		</ul>
+		<li>By default STELAR will run in heuristic version. To run the exact version just add <code>-xt</code> paramter</li>
+	<li>to score the number of triplets in a given species tree run</li>
+	<code>java -jar STELAR.jar -i in.gene.trees -q given.species.tree</code> <br>
+	
+	</ul>
+	
+	
 </div>
 </div>
 
