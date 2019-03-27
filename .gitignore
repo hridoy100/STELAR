@@ -4,4 +4,7 @@
 .metadata*
 .project*
 .settings*
-out*
+out/*
+.class*
+.py*
+
