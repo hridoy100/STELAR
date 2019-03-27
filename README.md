@@ -5,7 +5,7 @@ The algorithm used is described in our paper "STELAR: A statistically consistent
 
 ## Availability
 
-STELAR is freely available at [https://github.com/islamazhar/STELAR](https://github.com/islamazhar/STELAR).
+STELAR is freely available at [https://github.com/islamazhar/STELAR](https://islamazhar.github.io/STELAR/#installation).
 
 ## Background and Results
 Species tree estimation is frequently based on phylogenomic approaches that use multiple genes from throughout the genome. 
