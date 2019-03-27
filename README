@@ -1,13 +1,13 @@
-DESCRIPTION:
+##DESCRIPTION:
 ----------------------
 STELAR is a method (written in Java) for estimating species trees given a set of rooted gene trees, such that triplet consistency (between a species tree and the gene trees) is maximized within a constrained search space. 
 The algorithm used is described in our paper STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency".
 
-Acknowledgment
+##Acknowledgment
 -----------------------
 STELAR code uses code from the PhyloNet package by Luay Nakhleh (bioinfo.cs.rice.edu/phylonet). 
 The Phylonet code base was subsequently used by DynaDup and ASTRAL (with permission from Authors), and STELAR is mostly based on DynaDup code base.
 
-Bug Reports:
+##Bug Reports:
 -----------------
 contact mazhar.buet11@gmail.com
