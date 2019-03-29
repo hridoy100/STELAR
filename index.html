@@ -137,26 +137,20 @@ We are always looking for ways to improve our codes. For any bugs please email a
 </form>
   
   <h4>How to run</h4>
-	STELAR provides a jar file. You need to execute the jar file via command line. STELAR requires your machine to have java version 1.5
+	STELAR provides a jar file. You need to execute the jar file via command line. STELAR requires your machine to have java version 9.0.4
 	installed on your computer or later.
 	<ul>	
 	<li><code>cd</code> to the location where you have downloaded the STELAR jar file. </li>
 	<li>run the following command</li>
-	<code>java -jar STELAR.jar -i in.gene.trees-o out.species.tree</code> <br>
-		Here,
-		<ul>
-			<li><code>in.gene.trees</code> is the input gene trees which needs to be  a) fully resolved, b) rooted.</li>
-			<li><code>out.species.tree</code> is the output species trees</li>
-		</ul>
+	<code>java -jar STELAR.jar -i <input-gene-tree-name>  -o <out-species-tree-name> </code> <br>
 	</ul>
 	<h4>Options</h4>
 	<ul>
 	<li>By default STELAR will run in heuristic version. To run the exact version just add <code>-xt</code> paramter</li>. Therefore to run the exact 
 	version command should be <br>
-	<code>java -jar STELAR.jar -i in.gene.trees -o out.species.tree -xt</code>
+	<code>java -jar STELAR.jar -i <input-gene-tree-name>  -o <out-species-tree-name> -xt</code>
 	<li>To score the number of triplets in a given species tree run</li>
-	<code>java -jar STELAR.jar -i in.gene.trees -q given.species.tree</code> <br>
-	
+	<code>java -jar STELAR.jar -i <input-gene-tree-name>  -q <score-species-tree-name> > </code> <br>
 	</ul>
 	
 	
