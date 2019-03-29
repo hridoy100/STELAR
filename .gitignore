@@ -8,3 +8,7 @@ out/*
 .class*
 .py*
 .idea*
+make.sh
+manifest*
+STELAR.imi
+
