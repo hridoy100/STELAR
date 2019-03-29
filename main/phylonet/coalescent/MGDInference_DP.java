@@ -743,7 +743,7 @@ public class MGDInference_DP {
 				.println("This tool infers the species tree from rooted gene trees  by maximizing  the triplet distribution in the input gene trees.");
 		System.out.println("Usage is:");
 		System.out
-				.println("\tMGDInference_DP -i input [-a mapping] [-dl | -dll] [-ex extra_trees] [-o output] [-cs number] [-cd number] [-xt] [-s species tree] [-wd duplication weight]");
+				.println("\tMGDInference_DP -i input [-a mapping]  [-ex extra_trees] [-o output]  [-xt] [-s species tree] [-q score_tree ]");
 		System.out
 				.println("\t-i gene tree file: The file containing gene trees. (required)");
 		System.out
@@ -754,7 +754,7 @@ public class MGDInference_DP {
 						 "\t                 Alternatively, two reqular expressions for automatic name conversion (optional)");
 		System.out
 				.println("\t-o species tree file: The file to store the species tree. (optional)");
-		System.out.println("\t-dl N: optimize duplications and losses. Use -dl 0 for standard (homomorphic) definition, and -dl 1 for ``bd'' definition. Any value in between weights the impact of missing taxa on the tree.");
+		//System.out.println("\t-dl N: optimize duplications and losses. Use -dl 0 for standard (homomorphic) definition, and -dl 1 for ``bd'' definition. Any value in between weights the impact of missing taxa on the tree.");
 		System.out.println("\t-xt find the exact solution by looking at all clusters.");
 		//System.out.println("\t-u treat input gene trees as unrooted (Not implemented!)");
 		System.out.println("\t-ex provide extra trees to add to set of STBs searched");
