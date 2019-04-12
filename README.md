@@ -22,7 +22,9 @@ Theoretical and empirical results (on both simulated and real biological dataset
 STELAR is a valuable technique for species tree estimation from gene tree distributions.
 
 ## Acknowledgment
-STELAR code uses code from the PhyloNet package by Luay Nakhleh (bioinfo.cs.rice.edu/phylonet). The Phylonet code base was previously used by DynaDup and ASTRAL (with permission from Authors), and STELAR is mostly based on DynaDup code base.
+STELAR code uses code from the PhyloNet package by Luay Nakhleh (bioinfo.cs.rice.edu/phylonet). 
+The Phylonet code base was previously used by DynaDup and ASTRAL (with permission from Authors), and 
+STELAR is mostly based on DynaDup code base.
 
 ## Bug Reports
 We are always looking for ways to improve our codes. For any bugs please email at: mazhar.buet11@gmail.com
