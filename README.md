@@ -1,7 +1,7 @@
 ## DESCRIPTION:
 
 STELAR is a Dynamic Programming (DP) based software for estimating species trees given a set of rooted gene trees, such that triplet consistency (between a species tree and the gene trees) is maximized within a constrained search space. STELAR is fast, highly accurate and statistically consistent. 
-The algorithm used is described in our paper **"STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency."**
+The algorithm used is described in our paper **"STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency."** [(Paper link)](https://www.biorxiv.org/content/10.1101/594911v1)
 
 ## Availability
 
