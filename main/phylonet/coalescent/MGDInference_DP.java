@@ -94,13 +94,8 @@ public class MGDInference_DP {
 	public static void main(String[] args) {
 		
 
-        System.err.println("This is STELAR version" + _versinon+"\n");
-        System.out.println(" _______________________________.____    .____       _____ __________ \n" +
-				" /   _____/\\__    ___/\\_   _____/|    |   |    |     /  _  \\\\______   \\\n" +
-				" \\_____  \\   |    |    |    __)_ |    |   |    |    /  /_\\  \\|       _/\n" +
-				" /        \\  |    |    |        \\|    |___|    |___/    |    \\    |   \\\n" +
-				"/_______  /  |____|   /_______  /|_______ \\_______ \\____|__  /____|_  /\n" +
-				"        \\/                    \\/         \\/       \\/       \\/       \\/ ");
+        System.err.println("This is STELAR version " + _versinon+"\n");
+		System.err.println("========================================================\n");
 
 		if ((args == null) || args.length == 0 || (args[0].equals("-h"))
 				|| (args.length < 1)) {
