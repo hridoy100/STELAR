@@ -1,20 +1,18 @@
-Datasets for "STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency".
+### Datasets for "STELAR: A statistically consistent coalescent-based species trees estimation method by maximizing triplet consistency".
+___________________________________________________________________________________________________________________________________________
+`Note:
+(astral, stelar, and mpest files are represented with .astral, .stelar and .mpest extensions respectively)`
 ___________________________________________________________________________________________________________________________________________
 
-(astral, stelar, and mpest files are represented with .astral, .stelar and .mpest extensions respectively)
-___________________________________________________________________________________________________________________________________________
 
-
-11-taxon datasets: 10 replicates (four model conditions: 100gene-100bp, 100gene-1000bp, 1000gene-100bp, 1000gene-1000bp)
+**11-taxon datasets**: 10 replicates (four model conditions: 100gene-100bp, 100gene-1000bp, 1000gene-100bp, 1000gene-1000bp)
 
 File contents:
   1. True species tree: 11-taxa/model_tree
   2. estimated genes strongILS: 11-taxa/estimated_genes_strongILS/<X>/Rep<Y>_XgenesLS - where Y is the replicate number (1...10), and Y is the number of genes.
   3. simulated genes strongILS: 11-taxa/simulated_genes_strongILS/<X>/Rep<Y>_XgenesLS - where Y is the replicate number (1...10), and Y is the number of genes.
 ____________________________________________________________________________________________________________________________________________
-___________________________________________________________________________________________________________________________________________--
-
-15-taxon datasets: 10 replicates (four model conditions: 100gene-100bp, 100gene-1000bp, 1000gene-100bp, 1000gene-1000bp)
+**15-taxon datasets**: 10 replicates (four model conditions: 100gene-100bp, 100gene-1000bp, 1000gene-100bp, 1000gene-1000bp)
 
 File contents:
   1. True species trees: 15-taxon/true-species.tre
@@ -25,10 +23,7 @@ File contents:
 
 ____________________________________________________________________________________________________________________________________________
 
-Avian and Mammalian datasets (Siavash et al., Science, 2014): mammalian simulated datasets
-____________________________________________________________________________________________________________________________________________
-
-Mammalian (37 taxa): 20 replicates. coalescence level = [noscale, scale2d, scale2u], number of genes = [25, 50, 100, 200, 400, 500], base pair = [500, 1000, 1500]
+**Mammalian (37 taxa)**: 20 replicates. coalescence level = [noscale, scale2d, scale2u], number of genes = [25, 50, 100, 200, 400, 500], base pair = [500, 1000, 1500]
 File contents:
   1. True species tree: 37-taxa/true.tre
   2. Gene trees: 37-taxa/X.y.Z/R<K>/Best.1 - where X is the coalescence level, Y is the number of genes, Z is the base pair, K is the replicate number (1...20).
