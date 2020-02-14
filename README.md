@@ -28,3 +28,18 @@ STELAR is mostly based on DynaDup code base.
 
 ## Bug Reports
 We are always looking for ways to improve our codes. For any bugs please email at: mazhar.buet11@gmail.com
+
+## Citation
+If you use this code or these benchmarks in your research, please cite the following publication.
+```
+@article{islam2020stelar,
+  title={STELAR: A statistically consistent coalescent-based species tree estimation method by maximizing triplet consistency},
+  author={Islam, Mazharul and Sarker, Kowshika and Das, Trisha and Reaz, Rezwana and Bayzid, Md Shamsuzzoha},
+  journal={BMC Genomics},
+  volume={21},
+  number={1},
+  pages={1--13},
+  year={2020},
+  publisher={BioMed Central}
+}
+```
