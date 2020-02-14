@@ -13,10 +13,7 @@ Species tree estimation is frequently based on phylogenomic approaches that use 
 However, estimating a species tree from a collection of gene trees can be complicated due to the presence of gene tree incongruence resulting from incomplete lineage sorting (ILS), which is modelled by the multi-species coalescent process. 
 Maximum likelihood and Bayesian MCMC methods can potentially result in accurate trees, but they do not scale well to large datasets.
 
-We present STELAR (Species Tree Estimation by maximizing tripLet AgReement), a new fast and highly accurate statistically consistent coalescent-based method for estimating species trees from a collection of gene trees. 
-We formalized the constrained triplet consensus (CTC) problem and showed that the solution to the CTC problem is a statistically consistent estimate of the species tree under the multi-species coalescent (MSC) model. 
-STELAR is an efficient dynamic programming based solution to the CTC problem which is very fast and highly accurate. We evaluated the accuracy of STELAR in comparison with MP-EST and ASTRAL -- two of the most popular and accurate coalescent-based methods. 
-Experimental results suggest that STELAR matches the accuracy of ASTRAL and improves on MP-EST.
+We present STELAR (Species Tree Estimation by maximizing tripLet AgReement), a new fast and highly accurate statistically consistent coalescent-based method for estimating species trees from a collection of gene trees. We formalized the constrained triplet consensus (CTC) problem and showed that the solution to the CTC problem is a statistically consistent estimate of the species tree under the multi-species coalescent (MSC) model. STELAR is an efficient dynamic programming based solution to the CTC problem which is highly accurate and scalable. We evaluated the accuracy of STELAR in comparison with SuperTriplets, which is an alternate fast and highly accurate triplet-based supertree method, and with MP-EST and ASTRAL – two of the most popular and accurate coalescent-based methods. Experimental results suggest that STELAR matches the accuracy of ASTRAL and improves on MP-EST and SuperTriplets.
 
 Theoretical and empirical results (on both simulated and real biological datasets) suggest that 
 STELAR is a valuable technique for species tree estimation from gene tree distributions.
