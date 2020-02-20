@@ -29,8 +29,8 @@ do
 			#echo $folder
 
 			sed 's/e-//g' $gt > $gt.temp #to replace e- with nothing
-      ./strip_edge_support2.pl -i $gt.temp -o $gt.stripped
-      ./reroot_tree.pl -t $gt.stripped -r GAL -o $gt.stripped.rooted
+                        ./strip_edge_support2.pl -i $gt.temp -o $gt.stripped
+                        ./reroot_tree.pl -t $gt.stripped -r GAL -o $gt.stripped.rooted
 
 			if [ $method == "mpest" ]; then
 					cp $gt.stripped.rooted gt
@@ -50,7 +50,7 @@ do
 					START=$(date +%s.%N)
 			 		java -jar $method.jar  $gt.stripped.rooted  $speciesTree
 					END=$(date +%s.%N)
-        	DIFF=$(echo "$END - $START" | bc)
+        	                        DIFF=$(echo "$END - $START" | bc)
 
 			else
 				speciesTree=$folder/R$j/$method
