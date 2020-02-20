@@ -21,22 +21,22 @@ def run(command):
       #print(temp)
       return temp.rstrip()
 
-RFRate_file = open("11-taxa-time.csv","w+")
-time_file = open("11-RFRateFile.csv","w+")
+time_file = open("11-taxa-time.csv","w+")
+RFRate_file = open("11-RFRateFile.csv","w+")
 
 
-RFRate_file.write("name,RF_rate\n")
-time_file.write("method,name,time\n")
+RFRate_file.write("method,name,gene,RF_rate\n")
+time_file.write("method,name,gene,time\n")
 
 folders = ["estimated_Xgenes_strongILS", "simulated_Xgenes_strongILS"]
 genes = ["5", "15", "25", "50", "100"]
 
 
-true_gene_tree = "model_tree_trimmed.label"
+true_species_tree = "model_tree_trimmed.label"
 
 if __name__=="__main__":
       #folders = next(os.walk('.'))[1] # get the folder list
-      for  folder in folders:
+        for  folder in folders:
             for gene in genes:
                         gt = folder + "/" + folder.replace("X", gene)
                         print(gt)
@@ -55,38 +55,41 @@ if __name__=="__main__":
                               timestamp = time.time()
                               run("./mpest ./root.gt ./specieslist11 1")
                               run("cp root.gt.best.of.10.tre "+speciestree+".mpest")
-                              time_file.write("MPEST"+gt+", "+str(time.time()-timestamp)+"\n")
+                              time_file.write("MPEST,"+folder+","+gene+","+str(time.time()-timestamp)+"\n")
+
 
                               # Running STELAR
                               timestamp = time.time()
                               res = run("java -jar stelar.jar -i "+location+" -st "+speciestree+".stelar")
-                              time_file.write("STELAR"+gt+", "+str(time.time()-timestamp)+"\n")
+                              time_file.write("STELAR,"+folder+","+gene+","+str(time.time()-timestamp)+"\n")
+
 
                               #running ASTRAL
                               timestamp = time.time()
                               run("java -jar astral.5.5.6.jar -i root.gt -o "+speciestree+".astral -x")
-                              time_file.write("ASTRAL"+gt+", "+str(time.time()-timestamp)+"\n")
+                              time_file.write("ASTRAL,"+folder+","+gene+","+str(time.time()-timestamp)+"\n")
 
 
                               #running ASTRAL
                               timestamp  = time.time()
                               run("java -jar SuperTriplets_v1.1.jar root.gt "+speciestree+".SuperTriplets")
-                              time_file.write("SuperTriplets_v1"+gt+", "+str(time.time()-timestamp)+"\n")
+                              time_file.write("SuperTriplets_v1,"+folder+","+gene+","+str(time.time()-timestamp)+"\n")
 
 
 
-                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".mpest -t  "+ true_gene_tree +"  | sed 's/.//; s/,//' |awk '{print $3}'")
-                              RFRate_file.write("MPEST,"+gt+","+RF_rate+"\n")
 
-                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".stelar -t  " + true_gene_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
-                              RFRate_file.write("MPEST,"+gt+","+RF_rate+"\n")
+                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".mpest -t  "+ true_species_tree +"  | sed 's/.//; s/,//' |awk '{print $3}'")
+                              RFRate_file.write("MPEST,"+folder+","+gene+","+RF_rate.replace(")","")+"\n")
 
-                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".astral -t  " + true_gene_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
-                              RFRate_file.write("MPEST,"+gt+","+RF_rate+"\n")
+                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".stelar -t  " + true_species_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
+                              RFRate_file.write("STELAR,"+folder+","+gene+","+RF_rate.replace(")","")+"\n")
 
-                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".SuperTriplets -t  " + true_gene_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
-                              RFRate_file.write("SuperTriplets,"+gt+","+RF_rate+"\n")
+                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".astral -t  " + true_species_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
+                              RFRate_file.write("ASTRAL,"+folder+","+gene+","+RF_rate.replace(")","")+"\n")
 
+                              RF_rate = run("python2 getFpFn.py -e  "+speciestree+".SuperTriplets -t  " + true_species_tree + "  | sed 's/.//; s/,//' |awk '{print $3}'")
+                              RFRate_file.write("SuperTriplets,"+folder+","+gene+","+RF_rate.replace(")","")+"\n")
+                              #break
 
-
+                        #break
             #break
