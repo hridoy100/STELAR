@@ -24,10 +24,10 @@ The Phylonet code base was previously used by DynaDup and ASTRAL (with permissio
 STELAR is mostly based on DynaDup code base.
 
 ## Bug Reports
-We are always looking for ways to improve our codes. For any bugs please email at: mazhar.buet11@gmail.com
+We are always looking for ways to improve our codes. For any bugs please email at: [mazhar.buet11@gmail.com](mailto:mazhar.buet11@gmail.com)
 
 ## Citation
-If you use this code or stelar tool in your research, please cite the following publication.
+If you use this code or STELAR tool in your research, please cite the following publication.
 ```
 @article{islam2020stelar,
   title={STELAR: A statistically consistent coalescent-based species tree estimation method by maximizing triplet consistency},
